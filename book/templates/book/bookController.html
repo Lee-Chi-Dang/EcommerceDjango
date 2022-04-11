@@ -1,0 +1,152 @@
+{% extends 'home/base.html' %}
+{% block content %}
+    <!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">BOOK CONTROLLER</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <!-- Image header -->
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+    <h2>Authors Table</h2>
+
+    <button><a href="{% url 'book:authorForm' %}">Create new author</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>Biography</th>
+        <th>Action</th>
+      </tr>
+      {% for author in authorList %}
+      <tr>
+        <td>{{ author.name }}</td>
+        <td>{{ author.biography }}</td>
+        <td>
+          <button><a href="{% url 'book:authorFormUpdate' author.id %}">Sửa</a></button>
+          <button><a href="{% url 'book:authorFormDelete' author.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>CategoryBook Table</h2>
+
+    <button><a href="{% url 'book:categoryForm' %}">Create new category</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      {% for category in categoryBooks %}
+      <tr>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <button><a href="{% url 'book:categoryFormUpdate' category.id %}">Sửa</a></button>
+          <button><a href="{% url 'book:categoryFormDelete' category.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>Publisher Table</h2>
+
+    <button><a href="{% url 'book:publisherForm' %}">Create new publisher</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+      {% for publisher in publishers %}
+      <tr>
+        <td>{{ publisher.name }}</td>
+        <td>{{ publisher.address }}</td>
+        <td>
+          <button><a href="{% url 'book:publisherFormUpdate' publisher.id %}">Sửa</a></button>
+          <button><a href="{% url 'book:publisherFormDelete' publisher.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>Book Table</h2>
+
+    <button><a href="{% url 'book:bookForm' %}">Create new book</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>ISBN</th>
+        <th>title</th>
+        <th>summary</th>
+        <th>numberOfPages</th>
+        <th>language</th>
+        <th>image</th>
+        <th>author</th>
+        <th>categoryBook</th>
+        <th>publisher</th>
+      </tr>
+      {% for book in books %}
+      <tr>
+        <td>{{ book.ISBN }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.summary }}</td>
+        <td>{{ book.numberOfPages }}</td>
+        <td>{{ book.language }}</td>
+        <td>{{ book.image }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.categoryBook }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>
+          <button><a href="{% url 'book:bookFormUpdate' book.ISBN %}">Sửa</a></button>
+          <button><a href="{% url 'book:bookFormDelete' book.ISBN %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>BookItem Table</h2>
+
+    <button><a href="{% url 'book:bookItemForm' %}">Create new bookItem</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>barcode</th>
+        <th>book name</th>
+        <th>price</th>
+        <th>discount</th>
+        <th>inventory</th>
+      </tr>
+      {% for bookItem in bookItems %}
+      <tr>
+        <td>{{ bookItem.barcode }}</td>
+        <td>{{ bookItem.book.title }}</td>
+        <td>{{ bookItem.price }}</td>
+        <td>{{ bookItem.discount }}</td>
+        <td>{{ bookItem.inventory }}</td>
+        <td>
+          <button><a href="{% url 'book:bookItemFormUpdate' bookItem.barcode %}">Sửa</a></button>
+          <button><a href="{% url 'book:bookItemFormDelete' bookItem.barcode %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- End page content -->
+</div>
+{% endblock %}

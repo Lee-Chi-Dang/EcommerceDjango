@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+{% block content %}
+    <!-- !PAGE CONTENT! -->
+<div style="margin-left: 30%">
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ cf.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+    {% for contact in contacts %}
+     <p>{{ contact.name }} - {{ contact.comment }}</p>
+    {{ contact.age }}
+    {% endfor %}
+
+</div>
+{% endblock %}

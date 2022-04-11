@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% block content %}
+    <!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">MOBILEPHONE CONTROLLER</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+    <h2>Form</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ af.as_p }}
+      <button type="submit">Xác Nhận</button>
+    </form>
+  </div>
+
+  <!-- End page content -->
+</div>
+{% endblock %}

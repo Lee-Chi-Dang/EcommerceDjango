@@ -1,0 +1,85 @@
+{% extends 'home/base.html' %}
+{% block content %}
+    <!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">MOBILEPHONE CONTROLLER</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <!-- Image header -->
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+
+    <h2>MobilePhone Table</h2>
+
+    <button><a href="{% url 'mobilephone:mobilephoneForm' %}">Create new mobilephone</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>image</th>
+        <th>storage</th>
+        <th>screensize</th>
+        <th>ram</th>
+        <th>chip</th>
+        <th>os</th>
+        <th>description</th>
+      </tr>
+      {% for mobilephone in mobilephoneAList %}
+      <tr>
+        <td>{{ mobilephone.name }}</td>
+        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis">{{ mobilephone.image }}</td>
+        <td>{{ mobilephone.storage }}</td>
+        <td>{{ mobilephone.screensize }}</td>
+        <td>{{ mobilephone.ram }}</td>
+        <td>{{ mobilephone.chip }}</td>
+        <td>{{ mobilephone.os }}</td>
+        <td>{{ mobilephone.description }}</td>
+        <td>
+          <button><a href="{% url 'mobilephone:mobilephoneFormUpdate' mobilephone.id %}">Sửa</a></button>
+          <button><a href="{% url 'mobilephone:mobilephoneFormDelete' mobilephone.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>MobilePhoneItem Table</h2>
+
+    <button><a href="{% url 'mobilephone:mobilephoneItemForm' %}">Create new mobilephone Item</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>ID</th>
+        <th>Phone</th>
+        <th>price</th>
+        <th>discount</th>
+        <th>inventory</th>
+      </tr>
+      {% for mobilephone in mobilephoneItemList %}
+      <tr>
+        <td>{{ mobilephone.id }}</td>
+        <td>{{ mobilephone.mobilePhone.name }}</td>
+        <td>{{ mobilephone.price }}</td>
+        <td>{{ mobilephone.discount }}</td>
+        <td>{{ mobilephone.inventory }}</td>
+        <td>
+          <button><a href="{% url 'mobilephone:mobilephoneItemFormUpdate' mobilephone.id %}">Sửa</a></button>
+          <button><a href="{% url 'mobilephone:mobilephoneItemFormDelete' mobilephone.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- End page content -->
+</div>
+{% endblock %}

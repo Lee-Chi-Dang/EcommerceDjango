@@ -1,0 +1,135 @@
+{% extends 'home/base.html' %}
+{% block content %}
+    <!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">BOOK CONTROLLER</p>
+    <p class="w3-right">
+      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-search"></i>
+    </p>
+  </header>
+
+  <!-- Image header -->
+
+  <!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+    <h2>TypeClothes Table</h2>
+
+    <button><a href="{% url 'clothes:typeClothesForm' %}">Create new type Clothes</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Sex</th>
+        <th>Action</th>
+      </tr>
+      {% for typeClothes in typeClothesList %}
+      <tr>
+        <td>{{ typeClothes.name }}</td>
+        <td>{{ typeClothes.description }}</td>
+        <td>{{ typeClothes.sex }}</td>
+        <td>
+          <button><a href="{% url 'clothes:typeClothesFormUpdate' typeClothes.id %}">Sửa</a></button>
+          <button><a href="{% url 'clothes:typeClothesFormDelete' typeClothes.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>BrandClothes Table</h2>
+
+    <button><a href="{% url 'clothes:brandClothesForm' %}">Create new Brand Clothes</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+      {% for brandClothes in brandClothesList %}
+      <tr>
+        <td>{{ brandClothes.name }}</td>
+        <td>{{ brandClothes.address }}</td>
+        <td>
+          <button><a href="{% url 'clothes:brandClothesFormUpdate' brandClothes.id %}">Sửa</a></button>
+          <button><a href="{% url 'clothes:brandClothesFormDelete' brandClothes.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>Clothes Table</h2>
+
+    <button><a href="{% url 'clothes:clothesForm' %}">Create new clothes</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>collection</th>
+        <th>material</th>
+        <th>size</th>
+        <th>color</th>
+        <th>image</th>
+        <th>Type</th>
+        <th>Brand</th>
+        <th>Action</th>
+      </tr>
+      {% for clothes in clothesList %}
+      <tr>
+        <td>{{ clothes.id }}</td>
+        <td>{{ clothes.name }}</td>
+        <td>{{ clothes.collection }}</td>
+        <td>{{ clothes.material }}</td>
+        <td>{{ clothes.size }}</td>
+        <td>{{ clothes.color }}</td>
+        <td>{{ clothes.image }}</td>
+        <td>{{ clothes.typeClothes.name }}</td>
+        <td>{{ clothes.brandClothes.name }}</td>
+        <td>
+          <button><a href="{% url 'clothes:clothesFormUpdate' clothes.id %}">Sửa</a></button>
+          <button><a href="{% url 'clothes:clothesFormDelete' clothes.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+    <h2>ClothesItem Table</h2>
+
+    <button><a href="{% url 'clothes:clothesItemForm' %}">Create new clothes Item</a></button>
+    <table class="w3-table-all w3-small">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>discount</th>
+        <th>inventory</th>
+        <th>Action</th>
+      </tr>
+      {% for clothesItem in clothesItemList %}
+      <tr>
+        <td>{{ clothesItem.id }}</td>
+        <td>{{ clothesItem.clothes.name }}</td>
+        <td>{{ clothesItem.price }}</td>
+        <td>{{ clothesItem.discount }}</td>
+        <td>{{ clothesItem.inventory }}</td>
+        <td>
+          <button><a href="{% url 'clothes:clothesItemFormUpdate' clothesItem.id %}">Sửa</a></button>
+          <button><a href="{% url 'clothes:clothesItemFormDelete' clothesItem.id %}">Xóa</a></button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+
+  <!-- End page content -->
+</div>
+{% endblock %}
