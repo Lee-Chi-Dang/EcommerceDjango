@@ -37,6 +37,7 @@
                 <li><a href="{% url 'clothes:clothes' %}">Clothes</a></li>
                 <li><a href="{% url 'clothes:clothesController' %}">Clothes Controller</a></li>
                 <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+                <li><a href="{% url 'cart:shoppingcart' %}">Cart</a></li>
             </ul>
         </div>
     <a href="#" class="w3-bar-item w3-button">Shirts</a>
@@ -114,5 +115,14 @@ function w3_close() {
 }
 </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function addCart(id){
+        num = 1;
+        $.post( "/cart/addcart", {'id':id, 'num':num, 'csrfmiddlewaretoken':'{{csrf_token}}'} , function( data ) {
+          alert('Them san pham thanh cong');
+        });
+    }
+</script>
 </body>
 </html>
