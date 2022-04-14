@@ -5,4 +5,5 @@ app_name = 'cart'
 urlpatterns = [
     path('addcart', views.addcart, name='addcart'),
     path('shoppingcart', views.shoppingcart, name='shoppingcart'),
+    path('saveCartAndOrder', views.savecart, name='savecart'),
 ]
