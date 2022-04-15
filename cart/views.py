@@ -4,6 +4,8 @@ from django.template.loader import render_to_string
 from book.models import BookItem
 from .forms import CartForm, OrderForm
 from .models import Order, Cart
+from shipment.forms import ShipmentForm
+from shipment.models import ShipmenCost
 
 # Create your views here.
 
@@ -41,17 +43,24 @@ def shoppingcart(request):
     carts = request.session['cart']
     for key,value in carts.items():
         total+=int(value['price'])*int(value['num'])
-    return render(request, 'cart/shoppingcart.html', {'total':total})
+    shipmentForm = ShipmentForm()
+    shipmentCost  = ShipmenCost.objects.all()
+    return render(request, 'cart/shoppingcart.html', {'total':total, 'shipmentForm':shipmentForm, 'shipmentCost':shipmentCost})
 
 def savecart(request):
     total = 0
     carts = request.session['cart']
     for key,value in carts.items():
         total+=int(value['price'])*int(value['num'])
+    shipmentForm = ShipmentForm(request.POST)
+    keyShipment = shipmentForm['selection'].value()
+    shipmentCost = ShipmenCost.objects.get(id=keyShipment)
+    total += shipmentCost.price
     #Order
     order = Order.objects.create(
         status='Thanh cong',
         amount=total,
+        shipment=shipmentForm
     )
     #End
     #Cart
@@ -65,5 +74,5 @@ def savecart(request):
             proQuantity=value['num'],
         )
     #End
-    return  HttpResponse('Thanh cong')
+    return  HttpResponse('Thanh cong' +str(total))
 

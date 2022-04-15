@@ -1,4 +1,5 @@
 from django.db import models
+from shipment.models import Shipment
 
 # Create your models here.
 class Order(models.Model):

@@ -54,12 +54,16 @@ tr:nth-child(even) {
       <td>{% widthratio value.price 1 value.num %}</td>
   </tr>
         {% endfor %}
-      <tr><td colspan="6" style="text-align: right; padding-right: 30%">Tổng tiền: {{total}}</td></tr>
+      <tr><td colspan="6" style="text-align: right; padding-right: 30%">Tổng tiền(Chưa bao gồm tiền Ship): {{total}}</td></tr>
 </table>
-
+  {% for value in shipmentCost %}
+  {{ value.name }}
+  {{ value.price }}
+  {% endfor %}
 
     <form action="{% url 'cart:savecart'%}" method="post">
       {% csrf_token %}
+      {{ shipmentForm.as_p }}
       <button type="submit">Xác Nhận</button>
     </form>
 
