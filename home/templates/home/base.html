@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'home/font-awesome.min.css' %}">
     <style>
         .w3-sidebar a {font-family: "Roboto", sans-serif}
         body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -31,39 +31,19 @@
             <ul>
                 <li><a href="{% url 'home:home' %}">Home</a></li>
                 <li><a href="{% url 'book:book' %}">Book</a></li>
-                <li><a href="{% url 'book:bookController' %}">Book Controller</a></li>
                 <li><a href="{% url 'mobilephone:mobilephone' %}">Mobilephone</a></li>
-                <li><a href="{% url 'mobilephone:mobilephoneController' %}">Mobilephone Controller</a></li>
                 <li><a href="{% url 'clothes:clothes' %}">Clothes</a></li>
-                <li><a href="{% url 'clothes:clothesController' %}">Clothes Controller</a></li>
                 <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+                <li><a href="{% url 'cart:shoppingcart' %}">Cart</a></li>
             </ul>
         </div>
-    <a href="#" class="w3-bar-item w3-button">Shirts</a>
-    <a href="#" class="w3-bar-item w3-button">Dresses</a>
-    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-      Jeans <i class="fa fa-caret-down"></i>
-    </a>
-    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
-      <a href="#" class="w3-bar-item w3-button">Relaxed</a>
-      <a href="#" class="w3-bar-item w3-button">Bootcut</a>
-      <a href="#" class="w3-bar-item w3-button">Straight</a>
-    </div>
-    <a href="#" class="w3-bar-item w3-button">Jackets</a>
-    <a href="#" class="w3-bar-item w3-button">Gymwear</a>
-    <a href="#" class="w3-bar-item w3-button">Blazers</a>
-    <a href="#" class="w3-bar-item w3-button">Shoes</a>
-  </div>
-  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">Newsletter</a>
-  <a href="#footer"  class="w3-bar-item w3-button w3-padding">Subscribe</a>
+    
 </nav>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
   <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+  <a href="{% url 'cart:shoppingcart' %}" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -114,5 +94,14 @@ function w3_close() {
 }
 </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function addCart(id){
+        num = 1;
+        $.post( "/cart/addcart", {'id':id, 'num':num, 'csrfmiddlewaretoken':'{{csrf_token}}'} , function( data ) {
+          alert('Them san pham thanh cong');
+        });
+    }
+</script>
 </body>
 </html>

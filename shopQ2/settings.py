@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'clothes',
     "register",
     'crispy_forms',
+    'cart',
+    'shipment',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +85,8 @@ WSGI_APPLICATION = 'shopQ2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shopq2',
-        'USER': 'root',
+        'NAME': 'shopq',
+        'USER': 'admin',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
     }
