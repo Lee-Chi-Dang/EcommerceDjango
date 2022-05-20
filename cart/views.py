@@ -57,13 +57,13 @@ def savecart(request):
     shipmentForm = ShipmentForm(request.POST)
     keyShipment = shipmentForm['selection'].value()
     addressShipment = shipmentForm['address'].value();
-    shipmentCost = ShipmenCost.objects.get(id=keyShipment)
-    total += shipmentCost.price
+    # shipmentCost = ShipmenCost.objects.get(id=keyShipment)
+    # total += shipmentCost.price
     #Shipment
     shipment = Shipment.objects.create(
         selection=keyShipment,
         address=addressShipment,
-        codShip=shipmentCost
+        codShip=0
     )
     #End
     #Order
