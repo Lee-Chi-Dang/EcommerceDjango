@@ -14,6 +14,81 @@
     <style>
         .w3-sidebar a {font-family: "Roboto", sans-serif}
         body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+        a{
+            text-decoration: none !important;
+        }
+
+        .menu li{
+             padding: 8px 16px;
+        }
+
+        .menu li:hover{
+            color: #000!important;
+            background-color: #ccc!important;
+        }
+
+        /*   --------------------------login --------------------------- */
+        form {border: 3px solid #f1f1f1;}
+
+        input[type=text], input[type=password] {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+
+        button {
+          background-color: #04AA6D;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        button:hover {
+          opacity: 0.8;
+        }
+
+        .cancelbtn {
+          width: auto;
+          padding: 10px 18px;
+          background-color: #f44336;
+        }
+
+        .imgcontainer {
+          text-align: center;
+          margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+          width: 20%;
+          border-radius: 50%;
+        }
+
+        .container {
+          padding: 16px;
+        }
+
+        span.psw {
+          float: right;
+          padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+          span.psw {
+             display: block;
+             float: none;
+          }
+          .cancelbtn {
+             width: 100%;
+          }
+        }
     </style>
 </head>
 <body>
@@ -27,38 +102,27 @@
     <h3 class="w3-wide"><b>LOGO</b></h3>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-      <div class="menu">
-            <ul>
-                <li><a href="{% url 'home:home' %}">Home</a></li>
-                <li><a href="{% url 'book:book' %}">Book</a></li>
-                <li><a href="{% url 'book:bookController' %}">Book Controller</a></li>
-                <li><a href="{% url 'mobilephone:mobilephone' %}">Mobilephone</a></li>
-                <li><a href="{% url 'mobilephone:mobilephoneController' %}">Mobilephone Controller</a></li>
-                <li><a href="{% url 'clothes:clothes' %}">Clothes</a></li>
-                <li><a href="{% url 'clothes:clothesController' %}">Clothes Controller</a></li>
-                <li><a href="{% url 'contact:contact' %}">Contact</a></li>
-                <li><a href="{% url 'cart:shoppingcart' %}">Cart</a></li>
-            </ul>
-        </div>
-    <a href="#" class="w3-bar-item w3-button">Shirts</a>
-    <a href="#" class="w3-bar-item w3-button">Dresses</a>
-    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-      Jeans <i class="fa fa-caret-down"></i>
-    </a>
-    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
-      <a href="#" class="w3-bar-item w3-button">Relaxed</a>
-      <a href="#" class="w3-bar-item w3-button">Bootcut</a>
-      <a href="#" class="w3-bar-item w3-button">Straight</a>
+    <div class="menu">
+        <ul style="list-style: none; padding: 8px 16px; text-decoration: none">
+            {{ request.session.customerInfor.lastname }}
+            {{ request.session.customerInfor.id }}
+            <li><a href="{% url 'home:home' %}">Home</a></li>
+            <li><a href="{% url 'book:book' %}">Book</a></li>
+            <li><a href="{% url 'book:bookController' %}">Book Controller</a></li>
+            <li><a href="{% url 'mobilephone:mobilephone' %}">Mobilephone</a></li>
+            <li><a href="{% url 'mobilephone:mobilephoneController' %}">Mobilephone Controller</a></li>
+            <li><a href="{% url 'clothes:clothes' %}">Clothes</a></li>
+            <li><a href="{% url 'clothes:clothesController' %}">Clothes Controller</a></li>
+            <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+            <li><a href="{% url 'cart:shoppingcart' %}">Cart</a></li>
+        </ul>
     </div>
-    <a href="#" class="w3-bar-item w3-button">Jackets</a>
-    <a href="#" class="w3-bar-item w3-button">Gymwear</a>
-    <a href="#" class="w3-bar-item w3-button">Blazers</a>
-    <a href="#" class="w3-bar-item w3-button">Shoes</a>
   </div>
+
   <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">Newsletter</a>
   <a href="#footer"  class="w3-bar-item w3-button w3-padding">Subscribe</a>
+    <li><a href="{% url 'customer:login' %}">Login</a></li>
 </nav>
 
 <!-- Top menu on small screens -->

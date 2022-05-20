@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://D:/DocumentAtClass/CSDL_DaPhuongTien/Facial-landmarks-with-dlib-OpenCV-master/Facial-landmarks-with-dlib-OpenCV-master/.idea/Facial-landmarks-with-dlib-OpenCV-master.iml" filepath="D:/DocumentAtClass/CSDL_DaPhuongTien/Facial-landmarks-with-dlib-OpenCV-master/Facial-landmarks-with-dlib-OpenCV-master/.idea/Facial-landmarks-with-dlib-OpenCV-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pythonProject/clone/django-ecommerce/.idea/django-ecommerce.iml" filepath="$PROJECT_DIR$/../pythonProject/clone/django-ecommerce/.idea/django-ecommerce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pythonProject/pythonProject/getColor/.idea/getColor.iml" filepath="$PROJECT_DIR$/../pythonProject/pythonProject/getColor/.idea/getColor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pythonProject/pythonProject/pythonProject3/.idea/pythonProject3.iml" filepath="$PROJECT_DIR$/../pythonProject/pythonProject/pythonProject3/.idea/pythonProject3.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shopQ2.iml" filepath="$PROJECT_DIR$/.idea/shopQ2.iml" />
     </modules>
   </component>

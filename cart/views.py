@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.shortcuts import redirect
 from book.models import BookItem
-from .forms import CartForm, OrderForm
+from .forms import CartForm, OrderForm, PaymentForm
 from .models import Order, Cart
 from shipment.forms import ShipmentForm
-from shipment.models import ShipmenCost
+from shipment.models import ShipmenCost, Shipment
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ def addcart(request):
         id =request.POST.get('id')
         num = request.POST.get('num')
 
-        bookItemCart = BookItem.objects.get(barcode = id)
+        bookItemCart = BookItem.objects.get(barcode=id)
         if id in cart.keys():
             itemCart = {
                 'name': bookItemCart.book.title,
@@ -45,7 +46,8 @@ def shoppingcart(request):
         total+=int(value['price'])*int(value['num'])
     shipmentForm = ShipmentForm()
     shipmentCost  = ShipmenCost.objects.all()
-    return render(request, 'cart/shoppingcart.html', {'total':total, 'shipmentForm':shipmentForm, 'shipmentCost':shipmentCost})
+    paymentForm = PaymentForm()
+    return render(request, 'cart/shoppingcart.html', {'total':total, 'shipmentForm':shipmentForm, 'shipmentCost':shipmentCost, 'paymentForm':paymentForm})
 
 def savecart(request):
     total = 0
@@ -54,25 +56,38 @@ def savecart(request):
         total+=int(value['price'])*int(value['num'])
     shipmentForm = ShipmentForm(request.POST)
     keyShipment = shipmentForm['selection'].value()
+    addressShipment = shipmentForm['address'].value();
     shipmentCost = ShipmenCost.objects.get(id=keyShipment)
     total += shipmentCost.price
+    #Shipment
+    shipment = Shipment.objects.create(
+        selection=keyShipment,
+        address=addressShipment,
+        codShip=shipmentCost
+    )
+    #End
     #Order
     order = Order.objects.create(
         status='Thanh cong',
         amount=total,
-        shipment=shipmentForm
+        shipment=shipment,
+        customerId=1,
     )
     #End
     #Cart
     for key, value in carts.items():
         items = Cart.objects.create(
-            orderId=order,
-            order_no='ORDER_'+str(order.id),
             proId=key,
             proPrice=value['price'],
             proImage=value['image'],
             proQuantity=value['num'],
+            order=order,
         )
     #End
-    return  HttpResponse('Thanh cong' +str(total))
+    paymentForm = PaymentForm(request.POST)
+    keyPayment = paymentForm['type'].value()
+    request.session.flush()
+    return redirect('/cart/paypal')
 
+def paypalPay(request):
+    return render(request, 'cart/paypal.html')

@@ -6,5 +6,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="pythonProject3" />
+    <orderEntry type="module" module-name="Facial-landmarks-with-dlib-OpenCV-master" />
+    <orderEntry type="module" module-name="getColor" />
+    <orderEntry type="module" module-name="django-ecommerce" />
   </component>
 </module>
